@@ -64,4 +64,4 @@ Aquí puedes ver una demostración rápida de cómo funciona la aplicación:
 **Para usarlo localmente:**
 1. Clona este repositorio en tu máquina local:
    ```bash
-   git clone [[https://URL-DE-TU-REPOSITORIO.git](https://github.com/bonifaci0/alura-challenge-amigo-secreto.git)]
+   git clone [[https://github.com/bonifaci0/alura-challenge-amigo-secreto.git](https://github.com/bonifaci0/alura-challenge-amigo-secreto.git)]
