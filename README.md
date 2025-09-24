@@ -17,9 +17,6 @@
 3. [Características Principales](#-características-principales)
 4. [Tecnologías Utilizadas](#-tecnologías-utilizadas)
 5. [Acceso al Proyecto](#-acceso-al-proyecto)
-6. [Estructura del Proyecto](#-estructura-del-proyecto)
-7. [Autor](#-autor)
-8. [Licencia](#-licencia)
 
 ---
 
