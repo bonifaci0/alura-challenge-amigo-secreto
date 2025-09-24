@@ -1,38 +1,42 @@
-// El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 let amigos = [] // Variable global que contiene la lista de amigos
 
-const ingresarNombre = document.getElementById('amigo');
-const botonAgregar = document.getElementById('button-add');
-const listaAmigos = document.getElementById('listaAmigos');
+const ingresarNombre = document.getElementById('amigo'); // Selecciona el input de ingreso de nombre
+const botonAgregar = document.getElementById('button-add'); // Selecciona el botón "Añadir"
+const listaAmigos = document.getElementById('listaAmigos'); // Selecciona la lista donde se mostrarán los amigos
+const titulo = document.querySelector('.section-title'); // Selecciona el título principal
 
 function agregarAmigo(){ 
-    const nombre = ingresarNombre.value.trim(); // Eliminar espacios en blanco al inicio y al final
-        
-        if (nombre === '') {
-            alert('Por favor ingresa un nombre válido.');
-            return;
-        }
 
-        if(amigos.includes(nombre)){
-            alert('Este nombre ya fue ingresado. Por favor ingresa un nombre diferente.');
-            ingresarNombre.value = '';
-            return;
-        }
-        
-    amigos.push(nombre);
-    console.log(amigos);
+    const nombreOriginal = ingresarNombre.value.trim();
+
+    // Validamos que el campo no esté vacío
+    if (nombreOriginal === '') {
+        mostrarError('Por favor, escribe un nombre antes de añadir.');
+        return;
+    }
+
+    // Convertimos el nuevo nombre a un formato estándar (todo minúsculas) para poder comparar
+    const nombreNormalizado = nombreOriginal.toLowerCase();
+    
+    // Creamos una copia TEMPORAL del array de amigos, también en minúsculas
+    const amigosNormalizados = amigos.map(amigo => amigo.toLowerCase());
+
+    // Comparamos los datos normalizados 
+    if (amigosNormalizados.includes(nombreNormalizado)) {
+        mostrarError('Este nombre ya ha sido agregado a la lista.');
+        ingresarNombre.value = '';
+        return;
+    }
+    
+    // Formateamos el nombre para que se vea bien en la lista 
+    const nombreFormateado = nombreOriginal.charAt(0).toUpperCase() + nombreOriginal.slice(1).toLowerCase();
+    
+    restaurarTitulo();
+
+    // Guardamos el nombre bien formateado, no el original
+    amigos.push(nombreFormateado);
     ingresarNombre.value = '';
     actualizarLista();
-}
-
-function actualizarLista(){
-    listaAmigos.innerHTML = '';
-
-    for (const amigo of amigos){
-        const nuevoAmigoElemento = document.createElement('li');
-        nuevoAmigoElemento.textContent = amigo;
-        listaAmigos.appendChild(nuevoAmigoElemento);
-    }
 }
 
 function sortearAmigo(){
@@ -46,4 +50,30 @@ function sortearAmigo(){
     
     const elementoResultado = document.getElementById('resultado');
     elementoResultado.textContent = `El amigo secreto es: ${amigoSecreto}. Disfruten su regalo :-)!`;
+}
+
+function mostrarError(mensaje) {
+    titulo.textContent = mensaje;
+    titulo.style.color = 'red'; // Cambia el color del texto a rojo
+
+    // El título se restaura después de 2 segundos
+    setTimeout(() => {
+        restaurarTitulo();
+    }, 2000);
+}
+
+function restaurarTitulo() {
+    titulo.textContent = 'Digite el nombre de sus amigos';
+    titulo.style.color = ''; // Revierte el color
+}
+
+function actualizarLista(){
+    listaAmigos.innerHTML = '';
+
+    // Recorremos el array de amigos y creamos un elemento <li> por cada uno
+    for (const amigo of amigos){
+        const nuevoAmigoElemento = document.createElement('li');
+        nuevoAmigoElemento.textContent = amigo;
+        listaAmigos.appendChild(nuevoAmigoElemento);
+    }
 }
