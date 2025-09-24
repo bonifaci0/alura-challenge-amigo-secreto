@@ -18,5 +18,14 @@ function actualizarLista(){
 }
 
 function sortearAmigo(){
+    if (amigos.length < 2) {
+        alert('Debe ingresar al menos dos amigos para poder sortear');
+        return;
+    }
+    const indiceAleatorio = Math.floor(Math.random() * amigos.length)
     
+    const amigoSecreto = amigos[indiceAleatorio];
+    
+    const elementoResultado = document.getElementById('resultado');
+    elementoResultado.textContent = `El amigo secreto es: ${amigoSecreto}. Disfruten su regalo :-)!`;
 }
